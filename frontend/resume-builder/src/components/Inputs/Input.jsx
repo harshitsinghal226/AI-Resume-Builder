@@ -22,7 +22,7 @@ const Input = ({ value, onChange, label, placeholder, type }) => {
           onChange={(e) => onChange(e)}
         />
 
-        {type === "pasword" && (
+        {type === "password" && (
           <>
             {showPassword ? (
               <FaRegEye
