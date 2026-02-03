@@ -25,6 +25,8 @@ import CertificationInfoForm from "./Forms/CertificationInfoForm";
 import AdditionalInfoForm from "./Forms/AdditionalInfoForm";
 import RenderResume from "../../components/ResumeTemplates/RenderResume";
 import { captureElementAsImage, dataURLtoFile, fixTailwindColors } from "../../utils/helper";
+import ThemeSelector from "./ThemeSelector";
+import Modal from "../../components/Modal";
 
 const EditResume = () => {
   const { resumeId } = useParams();
@@ -47,7 +49,7 @@ const EditResume = () => {
     profileInfo: {
       profileImg: null,
       profilePreviewUrl: "",
-      fullname: "",
+      fullName: "",
       designation: "",
       summary: "",
     },
@@ -536,7 +538,18 @@ const EditResume = () => {
   };
 
   // Delete resume
-  const handleDeleteResume = async () => {};
+  const handleDeleteResume = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axiosInstance.delete(API_PATHS.RESUME.DELETE(resumeId));
+      toast.success("Resume deleted successfully!");
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Error deleting resume:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // Download resume
   const reactToPrintFn = useReactToPrint({ contentRef: resumeDownloadRef });
@@ -660,6 +673,44 @@ const EditResume = () => {
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={openThemeSelector}
+        onClose={() => setOpenThemeSelector(false)}
+        title="Change Theme"
+      >
+        <div className="w-[90vw] h-[80vh]">
+          <ThemeSelector
+            selectedTheme={resumeData?.template}
+            setSelectedTheme={(value) => {
+              setResumeData((prevState) => ({
+                ...prevState,
+                template: value || prevState.template,
+              }));
+            }}
+            resumeData={null}
+            onClose={() => setOpenThemeSelector(false)}
+          />
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={openPreviewModal}
+        onClose={() => setOpenPreviewModal(false)}
+        title={resumeData.title}
+        showActionBtn
+        actionBtnText="Download"
+        actionBtnIcon={<LuDownload className="text-[16px]" />}
+        onActionClick={() => reactToPrintFn()}
+      >
+        <div ref={resumeDownloadRef} className="w-[98vw] h-[90vh]">
+          <RenderResume
+            templateId={resumeData?.template?.theme || ""}
+            resumeData={resumeData}
+            colorPalette={resumeData?.template?.colorPalette || ""}
+          />
+        </div>
+      </Modal>
     </DashboardLayout>
   );
 };
