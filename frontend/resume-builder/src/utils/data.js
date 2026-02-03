@@ -42,9 +42,9 @@ export const themeColorPalette = {
 };
 
 export const DUMMY_RESUME_DATA = {
-  personalInfo: {
+  profileInfo: {
     profileImg: null,
-    previewUrl: "",
+    profilePreviewUrl: "",
     fullName: "Harshit",
     designation: "Senior Software Engineer",
     summary:
