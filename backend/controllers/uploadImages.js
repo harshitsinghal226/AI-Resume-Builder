@@ -5,7 +5,7 @@ const upload = require("../middlewares/uploadMiddleware");
 
 const uploadResumeImages = async (req, res) => {
   try {
-    upload.fields([{ name: "thumbnail" }, { name: "profileImage" }])(
+    upload.fields([{ name: "thumbnail" }, { name: "profileImg" }])(
       req,
       res,
       async (err) => {
@@ -31,7 +31,7 @@ const uploadResumeImages = async (req, res) => {
         const baseUrl = `${req.protocol}://${req.get("host")}`;
 
         const newThumbnail = req.files.thumbnail?.[0];
-        const newProfileImage = req.files.profileImage?.[0];
+        const newProfileImage = req.files.profileImg?.[0];
 
         // If new thumbnail uploaded, delete old one
         if (newThumbnail) {

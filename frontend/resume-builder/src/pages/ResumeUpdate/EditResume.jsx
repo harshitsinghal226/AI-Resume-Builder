@@ -599,7 +599,7 @@ const EditResume = () => {
   return (
     <DashboardLayout>
       <div className="container mx-auto">
-        <div className="flex items-center justify-between gap-5 bg-white rounded-lg border border-purple-100 py-3 px-4 mb-4">
+        <div className="flex items-center justify-between gap-5 bg-white/80 backdrop-blur-md rounded-2xl border-2 border-[#CDBFA5]/30 shadow-lg py-4 px-6 mb-6">
           <TitleInput
             title={resumeData.title}
             setTitle={(value) =>
@@ -634,15 +634,15 @@ const EditResume = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div className="bg-white rounded-lg border border-purple-100 overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl border-2 border-[#CDBFA5]/30 shadow-lg overflow-hidden">
             <StepProgress progress={progress} />
 
             {renderForm()}
 
             <div className="mx-5">
               {errorMsg && (
-                <div className="flex items-center gap-2 text-[11px] font-medium text-amber-600 bg-amber-100 px-2 py-0.5 my-1 rounded">
+                <div className="flex items-center gap-2 text-[11px] font-medium text-amber-700 bg-amber-50 border border-amber-200 px-3 py-2 my-2 rounded-lg shadow-sm">
                   <LuCircleAlert className="text-md" /> {errorMsg}
                 </div>
               )}

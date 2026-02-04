@@ -29,16 +29,16 @@ const Dashboard = () => {
   } , []);
 
   return <DashboardLayout>
-    <div className='grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-7 pt-1 pb-6 px-4 md:px-0'>
+    <div className='grid grid-cols-1 md:grid-cols-4 gap-6 pt-1 pb-6 px-4 md:px-0'>
       <div 
-        className='h-[300px] flex flex-col gap-5 items-center justify-center bg-white rounded-lg border-purple-100 hover:border-purple-300 hover:bg-purple-50/5 cursor-pointer'
+        className='h-[350px] flex flex-col gap-5 items-center justify-center bg-white/80 backdrop-blur-md rounded-2xl border-2 border-dashed border-[#9C8D7F]/50 hover:border-[#9C8D7F] hover:bg-[#CDBFA5]/5 hover:scale-105 shadow-lg hover:shadow-xl cursor-pointer transition-all duration-300'
         onClick={() => setOpenCreateModal(true)}
       >
-        <div className='w-12 h-12 flex items-center justify-center bg-purple-200/60 rounded-2xl'>
-          <LuCirclePlus className='text-xl text-purple-500' />
+        <div className='w-16 h-16 flex items-center justify-center bg-gradient-to-br from-[#9C8D7F] to-[#CDBFA5] rounded-2xl shadow-lg'>
+          <LuCirclePlus className='text-3xl text-white' />
         </div>
 
-        <h3 className='font-medium text-gray-800'>Add New Resume</h3>
+        <h3 className='font-semibold text-[#2C3440] text-lg'>Add New Resume</h3>
       </div>
 
       {allResumes?.map((resume) => (
