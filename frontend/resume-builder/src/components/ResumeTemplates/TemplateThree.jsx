@@ -48,12 +48,12 @@ const TemplateThree = ({ resumeData, colorPalette, containerWidth }) => {
   return (
     <div
       ref={resumeRef}
-      className="p-3 bg-white"
+      className="p-3 bg-white flex flex-col"
       style={{
         transform: containerWidth > 0 ? `scale(${scale})` : "none",
         transformOrigin: "top left",
-        width: containerWidth > 0 ? `${baseWidth}px` : "auto", // keep the originial size so scaling works correctly
-        height: "auto",
+        width: containerWidth > 0 ? `${baseWidth}px` : "auto",
+        minHeight: "297mm",
       }}
     >
 
@@ -111,7 +111,7 @@ const TemplateThree = ({ resumeData, colorPalette, containerWidth }) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-8">
+      <div className="grid grid-cols-12 gap-8 flex-1">
         <div
           className="col-span-4 py-10"
           style={{ backgroundColor: themeColors[0] }}

@@ -52,8 +52,8 @@ const TemplateTwo = ({ resumeData, colorPalette, containerWidth }) => {
       style={{
         transform: containerWidth > 0 ? `scale(${scale})` : "none",
         transformOrigin: "top left",
-        width: containerWidth > 0 ? `${baseWidth}px` : "auto", // keep the originial size so scaling works correctly
-        height: "auto",
+        width: containerWidth > 0 ? `${baseWidth}px` : "auto",
+        minHeight: "297mm",
       }}
     >
       <div className="px-10 pt-10 pb-5">

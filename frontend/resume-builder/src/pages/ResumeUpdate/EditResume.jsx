@@ -552,7 +552,29 @@ const EditResume = () => {
   };
 
   // Download resume
-  const reactToPrintFn = useReactToPrint({ contentRef: resumeDownloadRef });
+  const reactToPrintFn = useReactToPrint({
+    contentRef: resumeDownloadRef,
+    pageStyle: `
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+      @media print {
+        html, body {
+          margin: 0;
+          padding: 0;
+          width: 210mm;
+          height: 297mm;
+        }
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+          color-adjust: exact !important;
+        }
+      }
+    `,
+    documentTitle: resumeData.title || "Resume",
+  });
 
   // Function to update baseWidth based on the resume container size
   const updateBaseWidth = () => {
@@ -703,12 +725,15 @@ const EditResume = () => {
         actionBtnIcon={<LuDownload className="text-[16px]" />}
         onActionClick={() => reactToPrintFn()}
       >
-        <div ref={resumeDownloadRef} className="w-[98vw] h-[90vh]">
-          <RenderResume
-            templateId={resumeData?.template?.theme || ""}
-            resumeData={resumeData}
-            colorPalette={resumeData?.template?.colorPalette || ""}
-          />
+        <div className="w-full h-[75vh] overflow-auto bg-gray-100 p-4 flex items-start justify-center">
+          <div ref={resumeDownloadRef} style={{ width: "210mm", minHeight: "297mm", backgroundColor: "white" }}>
+            <RenderResume
+              templateId={resumeData?.template?.theme || ""}
+              resumeData={resumeData}
+              colorPalette={resumeData?.template?.colorPalette || ""}
+              containerWidth={793}
+            />
+          </div>
         </div>
       </Modal>
     </DashboardLayout>
