@@ -1,5 +1,4 @@
-const fs = require('node:fs');
-const path = require('node:path');
+const cloudinary = require('../config/cloudinary');
 const Resume = require('../models/Resume');
 
 // @desc   Create a new resume
@@ -164,18 +163,29 @@ const deleteResume = async (req, res) => {
             return res.status(404).json({ message: 'Resume not found' });
         }
 
-        // Delete thumbnailLink and profilePreviewUrl images from uploads folder
-        const uploadsFolder = path.join(__dirname, '..', 'uploads');
-        const baseUrl = `${req.protocol}://${req.get('host')}`;
-
+        // Delete thumbnailLink and profilePreviewUrl images from Cloudinary
         if (resume.thumbnailLink) {
-            const oldThumbnail = path.join(uploadsFolder, path.basename(resume.thumbnailLink));
-            if(fs.existsSync(oldThumbnail)) fs.unlinkSync(oldThumbnail);
+            try {
+                // Extract public_id from the Cloudinary URL
+                const urlParts = resume.thumbnailLink.split('/');
+                const publicIdWithExtension = urlParts[urlParts.length - 1];
+                const publicId = `resume-builder/${publicIdWithExtension.split('.')[0]}`;
+                await cloudinary.uploader.destroy(publicId);
+            } catch (deleteError) {
+                console.error("Error deleting thumbnail from Cloudinary:", deleteError);
+            }
         }
 
         if(resume.profileInfo?.profilePreviewUrl) {
-            const oldProfile = path.join(uploadsFolder, path.basename(resume.profileInfo.profilePreviewUrl));
-            if(fs.existsSync(oldProfile)) fs.unlinkSync(oldProfile);
+            try {
+                // Extract public_id from the Cloudinary URL
+                const urlParts = resume.profileInfo.profilePreviewUrl.split('/');
+                const publicIdWithExtension = urlParts[urlParts.length - 1];
+                const publicId = `resume-builder/${publicIdWithExtension.split('.')[0]}`;
+                await cloudinary.uploader.destroy(publicId);
+            } catch (deleteError) {
+                console.error("Error deleting profile image from Cloudinary:", deleteError);
+            }
         }
 
         const deleted = await Resume.findOneAndDelete({
