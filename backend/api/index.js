@@ -23,8 +23,12 @@ app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 connectDB();
 
 // Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/resume", resumeRoutes);
+app.use("/auth", authRoutes);
+app.use("/resume", resumeRoutes);
+
+app.get("/", (req, res) => {
+  res.json({ ok: true, message: "API is alive" });
+});
 
 // ❌ NO app.listen()
 // ✅ Export for Vercel
