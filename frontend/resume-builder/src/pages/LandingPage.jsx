@@ -14,7 +14,7 @@ const LandingPage = () => {
   const {user} = useContext(UserContext);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get(`${process.env.VITE_BACKEND_URL}`);
+    axios.get(`https://cvarticulator.onrender.com/`);
   }, []);
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [currentPage, setCurrentPage] = useState("login");

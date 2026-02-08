@@ -1,4 +1,4 @@
-export const BASE_URL = process.env.VITE_BACKEND_URL;
+export const BASE_URL = "https://cvarticulator.onrender.com";
 
 // utils/apiPaths.js
 export const API_PATHS = {

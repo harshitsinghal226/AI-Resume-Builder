@@ -12,7 +12,8 @@ const app = express();
 app.use(cors({
   origin: [
     "https://cvarticulator.vercel.app",
-    "https://cvarticulator-*.vercel.app"
+    "https://cvarticulator-*.vercel.app",
+    "*"
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
