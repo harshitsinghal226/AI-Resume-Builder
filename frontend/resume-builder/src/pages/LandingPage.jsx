@@ -7,12 +7,14 @@ import Login from "./Auth/Login";
 import Modal from "../components/Modal";
 import { UserContext } from "../context/userContext";
 import ProfileInfoCard from "../components/Cards/ProfileInfoCard";
+import { useEffect } from "react";
+import axios from "axios";
 
 const LandingPage = () => {
   const {user} = useContext(UserContext);
   const navigate = useNavigate();
   useEffect(() => {
-    
+    axios.get(`${process.env.VITE_BACKEND_URL}`);
   }, []);
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [currentPage, setCurrentPage] = useState("login");
