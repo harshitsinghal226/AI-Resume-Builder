@@ -11,7 +11,9 @@ import ProfileInfoCard from "../components/Cards/ProfileInfoCard";
 const LandingPage = () => {
   const {user} = useContext(UserContext);
   const navigate = useNavigate();
-
+  useEffect(() => {
+    
+  }, []);
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [currentPage, setCurrentPage] = useState("login");
 
